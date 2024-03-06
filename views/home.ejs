@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Modern News Platform</title>
+    <meta name="description" content="Stay updated with the latest news curated for our readers.">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/stylesheets/newsPage.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Raleway:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <!-- Include Font Awesome from CDN (use the link specific to your project/version) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="https://kit.fontawesome.com/dbed6b6114.js" crossorigin="anonymous"></script>
+    <style>
+        /* Enhanced newsPage.css for a professional, modern look */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', 'Raleway', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        header {
+            background-color: #343a40;
+            padding: 1rem 0;
+            color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,.2);
+        }
+
+        .navbar {
+            margin-top: 20px;
+            width: 100%; /* Full width for a more integrated look */
+            padding: 10px 0;
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            line-height: 50px;
+            font-size: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+        }
+        .navbar a {
+            text-decoration: none;
+            color: white;
+            margin: 0 20px;
+            font-size: 18px;
+            font-weight: 500;
+            transition: color 300ms ease-in-out; /* Smooth transition for hover effect */
+        }
+        .navbar a:hover {
+            color: #f2f2f2;
+        }
+        .banner-main-content {
+            background-image: url('path/to/your/background-image.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            text-align: center;
+            padding: 5rem 1.25rem;
+        }
+
+        .banner-sub-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 1rem;
+            gap: 1rem;
+        }
+
+        .hot-topic {
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 5px;
+            overflow: hidden;
+            max-width: calc(50% - 1rem);
+        }
+
+        .hot-topic img {
+            width: 100%;
+            height: auto;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .hot-topic-content {
+            padding: 1.25rem;
+        }
+
+        .hot-topic a {
+            background-color: #007bff;
+            color: #fff;
+            padding: 0.625rem 1.25rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .hot-topic a:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 768px) {
+            .banner-main-content, .hot-topic {
+                padding: 2.5rem 1rem;
+            }
+
+            .hot-topic {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav class="navbar">
+        <a href="/news/eng"><i class="fas fa-newspaper"></i> News</a>
+        <a href="/items"><i class="fas fa-box-open"></i> Items</a>
+        <a href="/quiz"><i class="fas fa-question-circle"></i> Quiz</a>
+        <a href="/logout"><i class="fas fa-sign-out-alt"></i> Log out</a>
+    </nav>
+
+</header>
+<div id="google_translate_element" style="text-align: center; margin: 20px auto; width: 50%;"></div>
+
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+    }
+</script>
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<div class="banner-main-content">
+    <h2 style="color: black;">BOOK NEWS</h2>
+</div>
+
+<div class="banner-sub-content">
+    <% news.forEach(news_item => { %>
+    <div class="hot-topic">
+        <img class="darken-image" src="<%=news_item.urlToImage%>" alt="">
+        <div class="hot-topic-content">
+            <h2><%=news_item.title%></h2>
+            <h3><%=news_item.author%></h3>
+            <p><%=news_item.description%></p>
+            <a href="<%=news_item.url%>">Read More</a>
+        </div>
+    </div>
+    <% }) %>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+</body>
+</html>

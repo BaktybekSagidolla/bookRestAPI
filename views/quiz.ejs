@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <!-- Include Font Awesome from CDN (use the link specific to your project/version) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
+            margin: 0;
+            padding: 0;
+            background-color: #f0f2f5; /* Light background for a fresh look */
+            color: #333; /* Consistent font color */
+        }
+
+        .navbar {
+            margin-top: 0px;
+            width: 100%;
+            padding: 10px 0;
+            background-color: #343a40;
+            color: white;
+            text-align: center;
+            line-height: 80px;
+            font-size: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: row;
+        }
+
+        .navbar a {
+            text-decoration: none;
+            color: white;
+            margin: 0 20px;
+            font-size: 18px;
+            font-weight: 500;
+            transition: color 300ms ease-in-out;
+        }
+
+        .navbar a:hover {
+            color: #f2f2f2;
+        }
+
+        .quiz-container {
+            background-color: #fff; /* White background for content area */
+            max-width: 800px; /* Max width for content area */
+            margin: 40px auto; /* Centering the container */
+            padding: 20px; /* Inner spacing */
+            border-radius: 8px; /* Rounded corners for modern look */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center; /* Center aligning the title */
+        }
+
+        .question {
+            margin: 20px 0;
+            font-size: 18px; /* Larger font size for readability */
+        }
+
+        .answer-field {
+            width: calc(100% - 20px); /* Full width inputs */
+            padding: 10px; /* Padding for input */
+            margin-bottom: 10px; /* Spacing between questions */
+            border: 1px solid #ccc; /* Subtle border */
+            border-radius: 5px; /* Rounded corners for input fields */
+            font-size: 16px; /* Readable font size */
+        }
+
+        .btn-container {
+            text-align: center; /* Center buttons */
+            margin-top: 20px;
+        }
+
+        .share-btn, .invite-btn, .submit-btn {
+            background-color: #007bff; /* Bootstrap primary color */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 300ms ease-in-out;
+        }
+
+        .share-btn:hover, .invite-btn:hover, .submit-btn:hover {
+            background-color: #0056b3; /* Darker shade on hover */
+        }
+
+        .timer {
+            font-weight: bold;
+            text-align: center;
+            margin: 20px 0;
+        }
+    </style>
+
+</head>
+<body>
+
+<nav class="navbar">
+    <a href="/news/eng"><i class="fas fa-newspaper"></i> News</a>
+    <a href="/items"><i class="fas fa-box-open"></i> Items</a>
+    <a href="/quiz"><i class="fas fa-question-circle"></i> Quiz</a>
+    <a href="/logout"><i class="fas fa-sign-out-alt"></i> Log out</a>
+</nav>
+<div id="google_translate_element" style="text-align: center; margin: 20px auto; width: 50%;"></div>
+<script type="text/javascript">
+    function googleTranslateElementInit() {
+        new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+    }
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<div class="quiz-container">
+    <h1>Quiz </h1>
+    <div class="timer">Time Left: <span id="timer">10:00</span></div>
+
+    <!-- Question 1 -->
+    <div class="question">Who is considered the father of Kazakh literature, known for his epic poems that delve into Kazakh history and culture?</div>
+    <input type="text" id="answer1" class="answer-field">
+
+    <!-- Question 2 -->
+    <div class="question">Which Kazakh writer and poet is known for his significant contribution to Kazakh literature in the Soviet era and has a university named after him in Almaty?</div>
+    <input type="text" id="answer2" class="answer-field">
+
+    <!-- Question 3 -->
+    <div class="question">What is the title of Mukhtar Auezov's most famous work, an epic novel that explores the life of a historical Kazakh figure, Abai Kunanbaev?</div>
+    <input type="text" id="answer3" class="answer-field">
+
+    <!-- Question 4 -->
+    <div class="question">Which work of Kazakh literature, considered a masterpiece of Kazakh folklore, tells the story of a young man's quest to rescue his beloved from a Khan?</div>
+    <input type="text" id="answer4" class="answer-field">
+
+    <!-- Question 5 -->
+    <div class="question">What is the significance of the epic poem "Koblandy Batyr" in Kazakh literature, and what themes does it explore?</div>
+    <input type="text" id="answer5" class="answer-field">
+
+        <button class="submit-btn" onclick="submitQuiz()">Submit Quiz</button>
+    </div>
+    <div id="dynamic-content"></div>
+</div>
+
+<script>
+    // Countdown timer
+    let timerElement = document.getElementById('timer');
+    let totalTime = 300; // 10 minutes in seconds
+
+    function startTimer() {
+        let timer = setInterval(function() {
+            let minutes = Math.floor(totalTime / 60);
+            let seconds = totalTime % 60;
+            timerElement.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            totalTime--;
+
+            if (totalTime < 0) {
+                clearInterval(timer);
+                timerElement.textContent = "Time's up!";
+                submitQuiz();
+            }
+        }, 1000);
+    }
+
+    startTimer();
+
+
+
+    // Submit quiz function
+    function submitQuiz() {
+        // Collect answers from input fields
+        const answer1 = document.getElementById('answer1').value;
+        // Repeat for other answers
+
+        // Prepare data to send to the server
+        const formData = {
+            question: 'Question 1', // Example question text
+            answer: answer1 // Example answer
+        };
+
+        // Send the data to the server
+        fetch('/submit_quiz_answer', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+            .then(response => {
+                if (response.ok) {
+                    return response.text();
+                } else {
+                    throw new Error('Error submitting quiz');
+                }
+            })
+            .then(data => {
+                console.log(data); // Print response from server
+                alert('Quiz submitted successfully!');
+                // Optionally, you can redirect or perform other actions here
+            })
+            .catch(error => {
+                console.error(error);
+                alert('Error submitting quiz');
+            });
+    }
+</script>
+</body>
+</html>

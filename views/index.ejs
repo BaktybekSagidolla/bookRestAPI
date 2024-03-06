@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-image: url('https://media.istockphoto.com/id/1421303925/vector/seamless-pattern-with-books-education-bookstore-library-concept.jpg?s=612x612&w=0&k=20&c=Yd37OMO_CfQG99hzG9rqieUkOC9S43_xOh60Lwiadoc=');
+            background-size: cover; /* Cover the entire page */
+            background-position: center; /* Center the background image */
+
+            font-family: 'Roboto', sans-serif;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container {
+            width: 80%;
+            max-width: 450px;
+            text-align: center;
+            padding: 25px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            border-radius: 10px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 18px;
+        }
+        input[type="text"], input[type="password"] {
+            padding: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            width: 100%;
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 6px;
+            width: 60%;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: 500;
+        }
+        p {
+            margin-top: 20px;
+        }
+        .alert {
+            width: 100%;
+            padding: 15px;
+            border-radius: 6px;
+            background-color: #dc3545;
+            color: white;
+            margin-bottom: 20px;
+        }
+        h1 {
+            margin-bottom: 25px;
+            color: #212529;
+        }
+        .icon-input {
+            position: relative;
+        }
+        .icon-input i {
+            position: absolute;
+            top: 16px;
+            left: 12px;
+            color: #adb5bd;
+            font-size: 16px;
+        }
+        .icon-input input {
+            padding-left: 40px;
+        }
+    </style>
+</head>
+<body>
+<% if (message) { %>
+    <div class="alert alert-danger" role="alert">
+        <%= message %>
+    </div>
+<% } %>
+<div class="container">
+    <h1>Log In</h1>
+    <form method="post" action="/login" onsubmit="return validateForm()">
+        <div class="icon-input">
+            <i class="fas fa-user"></i>
+            <input type="text" id="name" name="name" placeholder="Username">
+        </div>
+        <div class="icon-input">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="password" name="password" placeholder="Password">
+        </div>
+        <input type="submit" value="Log In">
+    </form>
+    <p>Don't have an account? <a href="/register">Sign Up</a></p>
+</div>
+<script>
+    function validateForm() {
+        const name = document.getElementById('name').value;
+        const password = document.getElementById('password').value;
+        if (name === "" || password === "") {
+            alert("Name and Password must be filled out");
+            return false;
+        }
+        return true;
+    }
+</script>
+</body>
+</html>

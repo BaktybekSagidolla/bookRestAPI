@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-image: url('https://media.istockphoto.com/id/1421303925/vector/seamless-pattern-with-books-education-bookstore-library-concept.jpg?s=612x612&w=0&k=20&c=Yd37OMO_CfQG99hzG9rqieUkOC9S43_xOh60Lwiadoc=');
+            background-size: cover; /* Cover the entire page */
+            background-position: center; /* Center the background image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            font-family: 'Segoe UI', Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #333;
+        }
+        .container {
+            width: 90%;
+            max-width: 400px;
+            margin: auto;
+            text-align: center;
+            padding: 30px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        label {
+            text-align: left;
+            width: 100%;
+        }
+        input[type="text"], input[type="password"] {
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            width: calc(100% - 22px); /* Adjust width considering padding and border */
+            font-size: 16px;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            font-weight: 600;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+        p {
+            margin-top: 20px;
+        }
+        .alert {
+            display: none; /* Initially hidden, will be shown by script if needed */
+            width: 100%;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #dc3545;
+            color: white;
+            margin-bottom: 20px;
+            transition: opacity 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+<% if (message) { %>
+    <div class="alert alert-danger" role="alert">
+        <%= message %>
+    </div>
+<% } %>
+<div class="container">
+    <h1>Register</h1>
+    <form method="post" action="/register" onsubmit="return validateForm()">
+        <label for="name">
+            Username:
+            <input type="text" id="name" name="name" required>
+        </label>
+        <label for="password">
+            Password:
+            <input type="password" id="password" name="password" required>
+        </label>
+        <input type="submit" value="Sign Up">
+    </form>
+    <p>Have an account? <a href="/">Sign In</a></p>
+</div>
+<script>
+    function validateForm() {
+        const name = document.getElementById('name').value;
+        const password = document.getElementById('password').value;
+        if (name === "" || password === "") {
+            alert("Name and Password must be filled out");
+            return false;
+        }
+        return true;
+    }
+    const alertElement = document.querySelector('.alert');
+    if (alertElement) {
+        alertElement.style.display = 'block';
+        setTimeout(() => {
+            alertElement.style.opacity = '0';
+        }, 2000);
+    }
+</script>
+</body>
+</html>

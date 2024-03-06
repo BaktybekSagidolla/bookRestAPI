@@ -1,0 +1,147 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            background-color: #f4f7fc;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .navbar-custom {
+            background-color: #4a76a8;
+        }
+
+        .btn-custom {
+            background-color: #4a76a8;
+            color: #fff;
+        }
+
+        .btn-custom:hover {
+            background-color: #3a5a78;
+            color: #fff;
+        }
+
+        .table-custom {
+            background-color: #ffffff;
+            box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+        }
+
+        .badge-custom {
+            background-color: #ff4757;
+            color: #fff;
+        }
+
+        .form-custom {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .icon-button {
+            cursor: pointer;
+            color: #4a76a8;
+        }
+    </style>
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+    <div class="container">
+        <a class="navbar-brand" href="#">Items Dashboard</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin">Admin</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<h1 class="text-center mt-4">Items</h1>
+
+<div class="container">
+    <button id="addItemButton" class="btn btn-success my-3" data-toggle="modal" data-target="#addItemModal"><i class="fas fa-plus"></i> Add New Item</button>
+    <div class="row">
+        <% items.forEach(item => { %>
+            <div class="col-md-4 my-2">
+                <div class="item">
+                    <% item.pictures.forEach(picture => { %>
+                        <img src="<%= picture %>" class="img-fluid mb-2" alt="Item Image">
+                    <% }) %>
+                    <% item.names.forEach(name => { %>
+                        <h2><%= name.name %></h2>
+                    <% }) %>
+                    <% item.descriptions.forEach(description => { %>
+                        <p><%= description.description %></p>
+                    <% }) %>
+                    <p>Created: <%= item.createdAt %></p>
+                    <p>Updated: <%= item.updatedAt %></p>
+                    <form action="/delete-item/<%= item._id %>" method="POST">
+                        <button type="submit" class="btn btn-danger"><i class="fas fa-trash-alt"></i> Delete</button>
+                    </form>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+
+    <!-- Add Item Modal -->
+    <div class="modal fade" id="addItemModal" tabindex="-1" role="dialog" aria-labelledby="addItemModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addItemModalLabel">Add New Item</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="/add-item" method="POST">
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="pictures" class="form-label">Pictures (URL)</label>
+                            <input type="text" class="form-control" id="pictures" name="pictures" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="name1" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name1" name="name1" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="description1" class="form-label">Description</label>
+                            <textarea class="form-control" id="description1" name="description1" rows="3" required></textarea>
+                        </div>
+                    <div class="modal-footer">
+
+                        <button type="submit" class="btn btn-primary">Add Item</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+<script>
+    document.getElementById('addItemButton').addEventListener('click', function() {
+        document.getElementById('addItemForm').style.display = 'block';
+    });
+
+    document.getElementById('closeFormButton').addEventListener('click', function() {
+        document.getElementById('addItemForm').style.display = 'none';
+    });
+</script>
+</body>
+</html>
